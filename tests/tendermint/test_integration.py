@@ -3,7 +3,7 @@ import pytest
 
 
 @pytest.mark.bdb
-@pytest.mark.tapp
+@pytest.mark.tendermint
 def test_app(b):
     from bigchaindb.tendermint import App
     from bigchaindb.tendermint.utils import calculate_hash
