@@ -4,8 +4,7 @@ BigchainDB: A Scalable Blockchain Database
 For full docs visit https://docs.bigchaindb.com
 
 """
-from setuptools import setup, find_packages
-
+from setuptools import find_packages, setup
 
 # get the version
 version = {}
@@ -19,10 +18,12 @@ def check_setuptools_features():
     try:
         list(pkg_resources.parse_requirements('foo~=1.0'))
     except ValueError:
-        exit('Your Python distribution comes with an incompatible version '
-             'of `setuptools`. Please run:\n'
-             ' $ pip3 install --upgrade setuptools\n'
-             'and then run this command again')
+        exit(
+            'Your Python distribution comes with an incompatible version '
+            'of `setuptools`. Please run:\n'
+            ' $ pip3 install --upgrade setuptools\n'
+            'and then run this command again'
+        )
 
 
 check_setuptools_features()
@@ -32,6 +33,8 @@ dev_require = [
     'ipython',
     'watchdog',
     'logging_tree',
+    'pre-commit',
+    'yapf',
 ]
 
 docs_require = [
@@ -98,13 +101,12 @@ setup(
         "powerful functionality to automate business processes, BigchainDB looks, "
         "acts and feels like a database but has the core blockchain "
         "characteristics that enterprises want."
-        ),
+    ),
     url='https://github.com/BigchainDB/bigchaindb/',
     author='BigchainDB Contributors',
     author_email='dev@bigchaindb.com',
     license='AGPLv3',
     zip_safe=False,
-
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
@@ -119,21 +121,20 @@ setup(
         'Operating System :: MacOS :: MacOS X',
         'Operating System :: POSIX :: Linux',
     ],
-
     packages=find_packages(exclude=['tests*']),
-
     entry_points={
-        'console_scripts': [
-            'bigchaindb=bigchaindb.commands.bigchaindb:main'
-        ],
+        'console_scripts': ['bigchaindb=bigchaindb.commands.bigchaindb:main'],
     },
     install_requires=install_requires,
     setup_requires=['pytest-runner'],
     tests_require=tests_require,
     extras_require={
-        'test': tests_require,
-        'dev': dev_require + tests_require + docs_require + benchmarks_require,
-        'docs': docs_require,
+        'test':
+            tests_require,
+        'dev':
+            dev_require + tests_require + docs_require + benchmarks_require,
+        'docs':
+            docs_require,
     },
     package_data={'bigchaindb.common.schema': ['*.yaml']},
 )
